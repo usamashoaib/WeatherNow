@@ -16,7 +16,7 @@ public class WeatherController {
     private WeatherService weatherService;
 
     @GetMapping("/current")
-    public ResponseEntity<Main> getCurrentWeather(@RequestParam(value = "city") String city, @RequestParam(value = "unit") String unit) {
+    public ResponseEntity<Main> getCurrentWeather(@RequestParam(value = "city") String city, @RequestParam(value = "unit", defaultValue = "Celsius") String unit) {
         return ResponseEntity.ok(weatherService.getWeatherData(city, unit));
     }
 }
