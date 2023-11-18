@@ -4,6 +4,7 @@ import com.example.WeatherNow.domain.weatherData.Main;
 import com.example.WeatherNow.service.WeatherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,6 +16,7 @@ public class WeatherController {
     @Autowired
     private WeatherService weatherService;
 
+    @PreAuthorize("hasRole('USER')")
     @GetMapping("/current")
     public ResponseEntity<Main> getCurrentWeather(@RequestParam(value = "city") String city, @RequestParam(value = "unit", defaultValue = "Celsius") String unit) {
         return ResponseEntity.ok(weatherService.getWeatherData(city, unit));
